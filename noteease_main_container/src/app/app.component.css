@@ -1,0 +1,61 @@
+.app-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.toolbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.content {
+  margin-top: 64px;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.search-bar {
+  margin: 16px 0;
+}
+
+.search-field {
+  width: 100%;
+  max-width: 600px;
+}
+
+.categories-container {
+  margin-bottom: 16px;
+}
+
+.notes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 16px;
+  padding: 16px 0;
+}
+
+.add-button {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background-color: #1976D2;
+  color: white;
+}
+
+@media (max-width: 600px) {
+  .content {
+    padding: 16px;
+  }
+
+  .notes-grid {
+    grid-template-columns: 1fr;
+  }
+}
