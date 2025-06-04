@@ -339,3 +339,25 @@ main.server.mjs      | main.server      | 800 bytes |
 
 Application bundle generation complete. [0.496 seconds]
 
+10:49:40 AM [vite] (ssr) ✨ new dependencies optimized: @angular/forms, @angular/material/toolbar, @angular/material/button, @angular/material/icon, @angular/material/input, @angular/material/form-field, @angular/material/chips, @angular/material/dialog, @angular/material/snack-bar, @angular/material/card, rxjs, @angular/platform-browser/animations
+10:49:40 AM [vite] (ssr) ✨ optimized dependencies changed. reloading
+Page reload sent to client(s).
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Application bundle generation failed. [0.422 seconds]
+
+✘ [ERROR] TS2307: Cannot find module '@angular/material/legacy-chips' or its corresponding type declarations. [plugin angular-compiler]
+
+    src/app/app.component.ts:10:55:
+      10 │ ...sModule as MatChipsModule } from '@angular/material/legacy-chips';
+         ╵                                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+✘ [ERROR] TS-991010: 'imports' must be an array of components, directives, pipes, or NgModules.
+  Value is of type '[CommonModule, RouterOutlet, FormsModule, MatToolbarModule, MatButtonModule, MatIconModule, MatInputModule, MatFormFieldModule, (not statically analyzable), MatDialogModule, MatSnackBarModule, NoteCardComponent]'. [plugin angular-compiler]
+
+    src/app/app.component.ts:23:11:
+      23 │   imports: [
+         ╵            ^
+
+
