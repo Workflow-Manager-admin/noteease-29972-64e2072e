@@ -33,6 +33,14 @@
 
 .categories-container {
   margin-bottom: 16px;
+  overflow-x: auto;
+  padding: 8px 0;
+}
+
+.mat-mdc-chip-set {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
 }
 
 .notes-grid {
@@ -40,6 +48,20 @@
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 16px;
   padding: 16px 0;
+}
+
+.no-notes {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 40px;
+  color: #666;
+}
+
+.no-notes mat-icon {
+  font-size: 48px;
+  width: 48px;
+  height: 48px;
+  margin-bottom: 16px;
 }
 
 .add-button {
