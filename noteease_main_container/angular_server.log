@@ -145,3 +145,43 @@ Application bundle generation failed. [0.414 seconds]
          ╵     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Application bundle generation failed. [0.012 seconds]
+
+▲ [WARNING] TS-998113: RouterOutlet is not used within the template of AppComponent [plugin angular-compiler]
+
+    src/app/app.component.ts:25:4:
+      25 │     RouterOutlet,
+         ╵     ~~~~~~~~~~~~
+
+
+✘ [ERROR] NG8002: Can't bind to 'selected' since it isn't a known property of 'mat-chip'.
+1. If 'mat-chip' is an Angular component and it has 'selected' input, then verify that it is included in the '@Component.imports' of this component.
+2. If 'mat-chip' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@Component.schemas' of this component to suppress this message.
+3. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component. [plugin angular-compiler]
+
+    src/app/app.component.html:22:18:
+      22 │                   [selected]="selectedCategories.has(category)"
+         ╵                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  Error occurs in the template of component AppComponent.
+
+    src/app/app.component.ts:37:15:
+      37 │   templateUrl: './app.component.html',
+         ╵                ~~~~~~~~~~~~~~~~~~~~~~
+
+
+✘ [ERROR] TS2729: Property 'noteService' is used before its initialization. [plugin angular-compiler]
+
+    src/app/app.component.ts:46:9:
+      46 │     this.noteService.getNotes(),
+         ╵          ~~~~~~~~~~~
+
+  'noteService' is declared here.
+
+    src/app/app.component.ts:74:4:
+      74 │     private noteService: NoteService,
+         ╵     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
