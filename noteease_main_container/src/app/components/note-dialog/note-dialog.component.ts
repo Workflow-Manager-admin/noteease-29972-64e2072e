@@ -44,18 +44,20 @@ import { Note } from '../../models/note.model';
         </mat-form-field>
 
         <mat-chip-set>
-          <mat-chip *ngFor="let category of note.categories" (removed)="removeCategory(category)">
-            {{category}}
-            <button matChipRemove>
-              <mat-icon>cancel</mat-icon>
-            </button>
-          </mat-chip>
+          @for (category of note.categories; track category) {
+            <mat-chip (removed)="removeCategory(category)">
+              {{category}}
+              <button matChipRemove>
+                <mat-icon>cancel</mat-icon>
+              </button>
+            </mat-chip>
+          }
         </mat-chip-set>
       </form>
     </mat-dialog-content>
 
     <mat-dialog-actions align="end">
-      <button mat-button (click)="onCancel()">Cancel</button>
+      <button mat-button mat-dialog-close>Cancel</button>
       <button mat-raised-button color="primary" 
               [disabled]="!noteForm.form.valid"
               (click)="onSave()">
@@ -83,7 +85,7 @@ export class NoteDialogComponent {
   categoryInput: string = '';
 
   constructor(
-    public dialogRef: MatDialogRef<NoteDialogComponent>,
+    private dialogRef: MatDialogRef<NoteDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Note | null
   ) {
     this.note = data ? { ...data } : {
@@ -114,10 +116,6 @@ export class NoteDialogComponent {
     if (index !== undefined && index >= 0) {
       this.note.categories?.splice(index, 1);
     }
-  }
-
-  onCancel(): void {
-    this.dialogRef.close();
   }
 
   onSave(): void {
