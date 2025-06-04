@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import { Injectable, PLATFORM_ID, Inject } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { BehaviorSubject, Observable, map } from 'rxjs';
 import { Note } from '../models/note.model';
 
@@ -8,8 +9,10 @@ import { Note } from '../models/note.model';
 export class NoteService {
   private notes = new BehaviorSubject<Note[]>([]);
   private readonly STORAGE_KEY = 'noteease_notes';
+  private isBrowser: boolean;
 
-  constructor() {
+  constructor(@Inject(PLATFORM_ID) platformId: Object) {
+    this.isBrowser = isPlatformBrowser(platformId);
     this.loadNotes();
   }
 
@@ -119,21 +122,25 @@ export class NoteService {
   }
 
   private loadNotes(): void {
-    const savedNotes = localStorage.getItem(this.STORAGE_KEY);
-    if (savedNotes) {
-      const parsedNotes = JSON.parse(savedNotes);
-      // Convert string dates back to Date objects
-      const notes = parsedNotes.map((note: any) => ({
-        ...note,
-        createdAt: new Date(note.createdAt),
-        updatedAt: new Date(note.updatedAt)
-      }));
-      this.notes.next(notes);
+    if (this.isBrowser) {
+      const savedNotes = window.localStorage.getItem(this.STORAGE_KEY);
+      if (savedNotes) {
+        const parsedNotes = JSON.parse(savedNotes);
+        // Convert string dates back to Date objects
+        const notes = parsedNotes.map((note: any) => ({
+          ...note,
+          createdAt: new Date(note.createdAt),
+          updatedAt: new Date(note.updatedAt)
+        }));
+        this.notes.next(notes);
+      }
     }
   }
 
   private saveNotes(): void {
-    localStorage.setItem(this.STORAGE_KEY, JSON.stringify(this.notes.value));
+    if (this.isBrowser) {
+      window.localStorage.setItem(this.STORAGE_KEY, JSON.stringify(this.notes.value));
+    }
   }
 
   private generateId(): string {
