@@ -43,11 +43,11 @@ import { Note } from '../../models/note.model';
           <mat-hint>Press Enter to add a category</mat-hint>
         </mat-form-field>
 
-        <mat-chip-set>
+        <mat-chip-set class="category-chips">
           @for (category of note.categories; track category) {
-            <mat-chip (removed)="removeCategory(category)">
+            <mat-chip class="category-chip">
               {{category}}
-              <button matChipRemove>
+              <button matChipRemove (click)="removeCategory(category)">
                 <mat-icon>cancel</mat-icon>
               </button>
             </mat-chip>
@@ -71,8 +71,15 @@ import { Note } from '../../models/note.model';
       margin-bottom: 16px;
     }
 
-    mat-chip-set {
+    .category-chips {
       margin-bottom: 16px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .category-chip {
+      margin: 4px;
     }
 
     textarea {
