@@ -3,6 +3,10 @@ import { isPlatformBrowser } from '@angular/common';
 import { BehaviorSubject, Observable, map } from 'rxjs';
 import { Note } from '../models/note.model';
 
+declare const globalThis: {
+  window: Window;
+};
+
 @Injectable({
   providedIn: 'root'
 })
@@ -123,7 +127,7 @@ export class NoteService {
 
   private loadNotes(): void {
     if (this.isBrowser) {
-      const savedNotes = window.localStorage.getItem(this.STORAGE_KEY);
+      const savedNotes = globalThis.window?.localStorage.getItem(this.STORAGE_KEY);
       if (savedNotes) {
         const parsedNotes = JSON.parse(savedNotes);
         // Convert string dates back to Date objects
@@ -139,7 +143,7 @@ export class NoteService {
 
   private saveNotes(): void {
     if (this.isBrowser) {
-      window.localStorage.setItem(this.STORAGE_KEY, JSON.stringify(this.notes.value));
+      globalThis.window?.localStorage.setItem(this.STORAGE_KEY, JSON.stringify(this.notes.value));
     }
   }
 
