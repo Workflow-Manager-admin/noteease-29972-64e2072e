@@ -36,13 +36,24 @@ export default [
         afterEach: "readonly",
         process: "readonly",
         console: "readonly",
+        globalThis: "readonly",
+        window: "readonly"
       },
     },
     plugins: {
       "@typescript-eslint": tseslint,
     },
     rules: {
-      // Your custom rules here
+      "no-unused-vars": "off",
+      "@typescript-eslint/no-unused-vars": ["error", {
+        "argsIgnorePattern": "^_",
+        "varsIgnorePattern": "^_",
+        "ignoreRestSiblings": true,
+        "args": "after-used"
+      }],
+      "@typescript-eslint/explicit-function-return-type": "off",
+      "@typescript-eslint/no-explicit-any": "off",
+      "@typescript-eslint/no-non-null-assertion": "off"
     },
   },
 ];
