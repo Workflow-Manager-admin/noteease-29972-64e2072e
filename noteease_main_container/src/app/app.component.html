@@ -17,14 +17,15 @@
     </div>
 
     <div class="categories-container" *ngIf="allCategories.size > 0">
-      <mat-chip-set>
+      <mat-chip-listbox [multiple]="true" class="mat-mdc-chip-set">
         @for (category of allCategories; track category) {
-          <mat-chip highlighted="{{selectedCategories.has(category)}}"
-                    (click)="toggleCategory(category)">
+          <mat-chip-option 
+            [selected]="isCategorySelected(category)"
+            (selectionChange)="toggleCategory(category)">
             {{ category }}
-          </mat-chip>
+          </mat-chip-option>
         }
-      </mat-chip-set>
+      </mat-chip-listbox>
     </div>
 
     <div class="notes-grid">
@@ -36,6 +37,11 @@
           (onPin)="onPinNote($event)"
           (onArchive)="onArchiveNote($event)"
         />
+      } @empty {
+        <div class="no-notes">
+          <mat-icon>note_add</mat-icon>
+          <p>No notes to display. Click the + button to create one!</p>
+        </div>
       }
     </div>
 

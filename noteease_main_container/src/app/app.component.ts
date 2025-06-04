@@ -7,7 +7,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatLegacyChipsModule as MatChipsModule } from '@angular/material/legacy-chips';
+import { MatChipsModule } from '@angular/material/chips';
 import { MatDialogModule, MatDialog } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
@@ -91,6 +91,10 @@ export class AppComponent implements OnInit {
     } else {
       this.selectedCategories.add(category);
     }
+  }
+
+  isCategorySelected(category: string): boolean {
+    return this.selectedCategories.has(category);
   }
 
   toggleArchiveView() {
