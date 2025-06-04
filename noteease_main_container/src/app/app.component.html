@@ -18,11 +18,12 @@
 
     <div class="categories-container" *ngIf="allCategories.size > 0">
       <mat-chip-set>
-        <mat-chip *ngFor="let category of allCategories"
-                  [selected]="selectedCategories.has(category)"
-                  (click)="toggleCategory(category)">
-          {{ category }}
-        </mat-chip>
+        @for (category of allCategories; track category) {
+          <mat-chip highlighted="{{selectedCategories.has(category)}}"
+                    (click)="toggleCategory(category)">
+            {{ category }}
+          </mat-chip>
+        }
       </mat-chip-set>
     </div>
 
@@ -43,3 +44,5 @@
     </button>
   </div>
 </div>
+
+<router-outlet />
