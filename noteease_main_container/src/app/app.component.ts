@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { FormsModule } from '@angular/forms';
@@ -7,7 +7,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatChipsModule } from '@angular/material/chips';
+import { MatChipsModule, MatChipSelectionChange } from '@angular/material/chips';
 import { MatDialogModule, MatDialog } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
@@ -38,10 +38,15 @@ import { BehaviorSubject, combineLatest, map } from 'rxjs';
   styleUrl: './app.component.css'
 })
 export class AppComponent implements OnInit {
+  private readonly noteService = inject(NoteService);
+  private readonly dialog = inject(MatDialog);
+  private readonly snackBar = inject(MatSnackBar);
+
   searchQuery = new BehaviorSubject<string>('');
   showArchived = false;
   allCategories: Set<string> = new Set();
   selectedCategories: Set<string> = new Set();
+
   filteredNotes$ = combineLatest([
     this.noteService.getNotes(),
     this.searchQuery
@@ -61,20 +66,12 @@ export class AppComponent implements OnInit {
           ) : true
         )
         .sort((a, b) => {
-          // Sort pinned notes first
           if (a.isPinned && !b.isPinned) return -1;
           if (!a.isPinned && b.isPinned) return 1;
-          // Then sort by update date
           return b.updatedAt.getTime() - a.updatedAt.getTime();
         });
     })
   );
-
-  constructor(
-    private noteService: NoteService,
-    private dialog: MatDialog,
-    private snackBar: MatSnackBar
-  ) {}
 
   ngOnInit() {
     this.noteService.getNotes().subscribe(notes => {
